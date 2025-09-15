@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/new_game_item"
+        android:title="@string/new_game"
+        android:icon="@drawable/baseline_add_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/difficulty_level_item"
+        android:title="@string/difficulty"
+        android:icon="@drawable/baseline_category_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/quit_item"
+        android:title="@string/quit"
+        android:icon="@drawable/baseline_close_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/about_item"
+        android:title="@string/about_item_text"
+        android:icon="@drawable/baseline_contact_support_24"
+        app:showAsAction="ifRoom" />
+</menu>
