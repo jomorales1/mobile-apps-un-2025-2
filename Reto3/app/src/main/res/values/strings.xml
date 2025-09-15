@@ -17,4 +17,7 @@
     <string name="result_human_wins">You won!</string>
     <string name="result_computer_wins">Android won!</string>
     <string name="new_game">New game</string>
+    <string name="android_0">Android: 0</string>
+    <string name="ties_0">Ties: 0</string>
+    <string name="human_0">Human: 0</string>
 </resources>
