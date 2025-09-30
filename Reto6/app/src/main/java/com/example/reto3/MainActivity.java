@@ -284,4 +284,8 @@ public class MainActivity extends AppCompatActivity implements ResetDialogFragme
     public TicTacToeGame getGame() {
         return game;
     }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
 }

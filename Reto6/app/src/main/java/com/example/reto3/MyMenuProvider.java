@@ -27,7 +27,7 @@ public class MyMenuProvider implements MenuProvider {
             this.activity.startNewGame();
             return true;
         } else if (menuItem.getItemId() == R.id.difficulty_level_item) {
-            new DifficultyDialogFragment(this.activity.getGame())
+            new DifficultyDialogFragment(this.activity, this.activity.getGame())
                     .show(this.activity.getSupportFragmentManager(), "DifficultyDialog");
             return true;
         } else if (menuItem.getItemId() == R.id.quit_item) {

@@ -12,8 +12,10 @@ import androidx.fragment.app.DialogFragment;
 public class DifficultyDialogFragment extends DialogFragment {
 
     private TicTacToeGame game;
+    private MainActivity mainActivity;
 
-    public DifficultyDialogFragment(TicTacToeGame game) {
+    public DifficultyDialogFragment(MainActivity mainActivity, TicTacToeGame game) {
+        this.mainActivity = mainActivity;
         this.game = game;
     }
 
@@ -47,6 +49,7 @@ public class DifficultyDialogFragment extends DialogFragment {
             } else {
                 game.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Expert);
             }
+            mainActivity.setDifficulty(item);
             Toast.makeText(requireContext(), levels[item], Toast.LENGTH_SHORT).show();
         });
 
