@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- App Bar / Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+        app:title="Tic Tac Toe"
+        tools:ignore="MissingConstraints" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="64dp"
+        android:paddingStart="160dp"
+        android:paddingEnd="64dp"
+        tools:ignore="MissingConstraints">
+
+        <com.example.reto3.BoardView
+            android:id="@+id/board"
+            android:layout_width="240sp"
+            android:layout_height="240sp"
+            android:layout_marginTop="25sp"/>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="15dp"
+            android:gravity="end">
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal">
+                <TextView android:id="@+id/human_wins" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/human_0"
+                    android:layout_marginTop="20dp" android:textSize="20sp" />
+                <TextView android:id="@+id/ties" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/ties_0"
+                    android:layout_marginTop="20dp" android:textSize="20sp"
+                    android:layout_toEndOf="@+id/human_wins" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+                <TextView android:id="@+id/android_wins" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="@string/android_0"
+                    android:layout_marginTop="20dp" android:textSize="20sp"
+                    android:layout_toEndOf="@+id/ties" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/information"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80sp"
+                android:gravity="center_horizontal"
+                android:text="@string/info"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
