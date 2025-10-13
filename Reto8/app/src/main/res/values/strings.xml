@@ -24,8 +24,8 @@
     <string name="go_back">Cancel</string>
     <string-array name="categories">
         <item></item>
-        <item>Consultoria</item>
-        <item>Desarrollo a la medida</item>
-        <item>Fabrica de software</item>
+        <item>Consultancy</item>
+        <item>Custom development</item>
+        <item>Software factory</item>
     </string-array>
 </resources>

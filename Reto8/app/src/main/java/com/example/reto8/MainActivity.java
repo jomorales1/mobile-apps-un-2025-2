@@ -2,6 +2,8 @@ package com.example.reto8;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -39,6 +41,26 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, Integer> data = new HashMap<>();
     ArrayList<DBHelper.DataObject> array_list = new ArrayList<>();
 
+    public void loadSampleCompaniesIfEmpty() {
+        if (mydb.getAllCompanies().isEmpty()) {
+            mydb.insertCompany("Tech Solutions", "+1 555-1234", "https://techsolutions.com", "info@techsolutions.com", "IT Consulting Services", "Consultancy");
+            mydb.insertCompany("NextGen Systems", "+1 555-2345", "https://nextgensystems.io", "hello@nextgensystems.io", "Business Process Optimization", "Consultancy");
+            mydb.insertCompany("CodeSmiths", "+1 555-3456", "https://codesmiths.dev", "team@codesmiths.dev", "Web & Mobile Apps", "Custom development");
+            mydb.insertCompany("SoftForge", "+1 555-4567", "https://softforge.com", "contact@softforge.com", "Enterprise Software Solutions", "Software factory");
+            mydb.insertCompany("BrightMind Consulting", "+1 555-5678", "https://brightmindconsulting.com", "info@brightmindconsulting.com", "Digital Strategy and Transformation", "Consultancy");
+            mydb.insertCompany("AppCrafters", "+1 555-6789", "https://appcrafters.co", "support@appcrafters.co", "Custom Mobile Development", "Custom development");
+            mydb.insertCompany("DevFoundry", "+1 555-7890", "https://devfoundry.io", "contact@devfoundry.io", "Software Outsourcing and QA", "Software factory");
+            mydb.insertCompany("Insight Partners", "+1 555-8901", "https://insightpartners.ai", "team@insightpartners.ai", "AI and Data Analytics Consulting", "Consultancy");
+            mydb.insertCompany("NovaSoft", "+1 555-9012", "https://novasoft.io", "info@novasoft.io", "Custom Web Platforms", "Custom development");
+            mydb.insertCompany("CodeWorks Factory", "+1 555-0123", "https://codeworksfactory.com", "hello@codeworksfactory.com", "Dedicated Software Teams", "Software factory");
+            mydb.insertCompany("Stratus Consulting", "+1 555-3141", "https://stratusconsulting.com", "support@stratusconsulting.com", "Cloud Migration Consulting", "Consultancy");
+            mydb.insertCompany("PixelForge", "+1 555-4151", "https://pixelforge.dev", "info@pixelforge.dev", "Frontend and UI Development", "Custom development");
+            mydb.insertCompany("LogicHub", "+1 555-5161", "https://logichub.io", "sales@logichub.io", "Enterprise Automation Systems", "Software factory");
+            mydb.insertCompany("Optima Advisors", "+1 555-6171", "https://optimaadvisors.com", "info@optimaadvisors.com", "Process Improvement Consulting", "Consultancy");
+            mydb.insertCompany("SwiftDev Studio", "+1 555-7181", "https://swiftdevstudio.com", "contact@swiftdevstudio.com", "iOS & Android App Development", "Custom development");
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,20 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DBHelper(this);
         // Seed database if empty
-        if (mydb.getAllCompanies().isEmpty()) {
-            mydb.insertCompany("Tech Solutions", "https://techsolutions.com",
-                    "+1 555-1234", "info@techsolutions.com",
-                    "Consultoría en TI", "Consultoria");
-
-            mydb.insertCompany("DevHouse", "https://devhouse.io",
-                    "+1 555-5678", "contact@devhouse.io",
-                    "Desarrollo de aplicaciones móviles", "Desarrollo a la medida");
-
-            mydb.insertCompany("SoftFactory", "https://softfactory.co",
-                    "+1 555-9012", "hello@softfactory.co",
-                    "Fábrica de software para empresas", "Fábrica de software");
-        }
-        //data.clear();
+        loadSampleCompaniesIfEmpty();
         array_list = mydb.getAllCompanies();
         ArrayList<String> companiesNames = new ArrayList<>();
         for (DBHelper.DataObject dataObject : array_list) {

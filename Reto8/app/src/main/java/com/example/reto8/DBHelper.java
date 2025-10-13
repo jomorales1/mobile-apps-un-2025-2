@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -71,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertCompany (String name, String url, String phone, String email, String products, String category) {
+    public boolean insertCompany (String name, String phone, String url, String email, String products, String category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -134,29 +135,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    @SuppressLint({"Range", "Recycle"})
+    @SuppressLint({"Range"})
     public ArrayList<DataObject> filter(String name, String category) {
         ArrayList<DataObject> array_list = new ArrayList<>();
-
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from companies", null );
-        if (!name.equals("") && !category.equals("")) {
-            res =  db.rawQuery( "select * from companies where name = \"" + name + "\" " +
-                    "and category = \"" + category + "\"", null );
-        } else if (!name.equals("")) {
-            res =  db.rawQuery( "select * from companies where name = \"" + name + "\" ", null);
-        } else if (!category.equals("")) {
-            res =  db.rawQuery( "select * from companies where category = \"" + category + "\" ", null);
-        }
-        res.moveToFirst();
 
-        while(!res.isAfterLast()){
-            // res.getString(res.getColumnIndex(COMPANIES_COLUMN_NAME))
-            array_list.add(new DataObject(res.getInt(res.getColumnIndex(COMPANIES_COLUMN_ID)),
-                    res.getString(res.getColumnIndex(COMPANIES_COLUMN_NAME))));
-            res.moveToNext();
+        // Build the WHERE clause dynamically
+        StringBuilder query = new StringBuilder("SELECT * FROM companies");
+        ArrayList<String> argsList = new ArrayList<>();
+
+        boolean hasName = name != null && !name.trim().isEmpty();
+        boolean hasCategory = category != null && !category.trim().isEmpty();
+
+        if (hasName || hasCategory) {
+            query.append(" WHERE ");
+            ArrayList<String> conditions = new ArrayList<>();
+
+            if (hasName) {
+                // Use LIKE for partial matches (case-insensitive)
+                conditions.add("LOWER(name) LIKE ?");
+                argsList.add("%" + name.toLowerCase() + "%");
+            }
+
+            if (hasCategory) {
+                conditions.add("category = ?");
+                argsList.add(category);
+            }
+
+            query.append(TextUtils.join(" AND ", conditions));
         }
+
+        Cursor res = db.rawQuery(query.toString(), argsList.toArray(new String[0]));
+
+        if (res.moveToFirst()) {
+            do {
+                int id = res.getInt(res.getColumnIndex(COMPANIES_COLUMN_ID));
+                String companyName = res.getString(res.getColumnIndex(COMPANIES_COLUMN_NAME));
+                array_list.add(new DataObject(id, companyName));
+            } while (res.moveToNext());
+        }
+
+        res.close();
+        db.close();
         return array_list;
     }
+
 }
